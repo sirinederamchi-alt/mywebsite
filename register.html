@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Register</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink-bg: #d8b2b4;
+            --page-bg: #f7f2f2;
+            --soft-pink: #f3c7cf;
+            --soft-pink-2: #f7d6dc;
+            --accent-pink: #d48a8f;
+            --black: #0a0a0a;
+            --muted: #6a6a6a;
+            --card: #ffffff;
+            --shadow: 0 12px 26px rgba(0,0,0,.18);
+            --shadow2: 0 10px 20px rgba(0,0,0,.12);
+            --radius: 18px;
+            --maxw: 1100px;
+            --success: #27ae60;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: var(--page-bg);
+            color: var(--black);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--card);
+            border-bottom: 1px solid #e7e0e0;
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-inner {
+            width: min(var(--maxw), 92vw);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 120px;
+        }
+
+        .brand-text {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--black);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            width: min(var(--maxw), 92vw);
+            margin: 60px auto;
+            padding: 60px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow2);
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 40px;
+            color: var(--black);
+        }
+
+        /* ===== FORM GROUPS ===== */
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--black);
+            font-size: 16px;
+        }
+
+        .required {
+            display: none;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e7e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        input[type="text"].error,
+        input[type="email"].error,
+        input[type="password"].error,
+        input[type="tel"].error {
+            border-color: #ff4757;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            background: var(--card);
+            box-shadow: 0 0 0 4px rgba(212, 138, 143, 0.1);
+        }
+
+        .error-message {
+            color: #ff4757;
+            font-size: 13px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--accent-pink);
+            color: var(--card);
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: #c97478;
+            box-shadow: var(--shadow2);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-pink);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 138, 143, 0.1);
+        }
+
+        /* ===== GOOGLE BUTTON ===== */
+        .google-signup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e7e0e0;
+            background: var(--card);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .google-signup:hover {
+            border-color: #d8b2b4;
+            background: #fafafa;
+        }
+
+        .google-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 32px 0;
+            gap: 16px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e7e0e0;
+        }
+
+        /* ===== PRIVACY NOTICE ===== */
+        .privacy-notice {
+            background: #f5f5f5;
+            border-left: 4px solid var(--accent-pink);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 40px 0;
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .privacy-notice a {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .privacy-notice a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== SIGN IN LINK ===== */
+        .signin-link {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .signin-link a {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            border: 2px solid var(--success);
+            color: var(--success);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav">
+        <div class="nav-inner">
+            <div class="brand">
+                <div class="brand-text">Skina</div>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="login.html">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>REGISTER</h1>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            Account created successfully! Redirecting...
+        </div>
+
+
+
+        <!-- Registration Form -->
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <div class="error-message" id="firstNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <div class="error-message" id="lastNameError"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Minimum 8 characters" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <div class="error-message" id="confirmPasswordError"></div>
+            </div>
+
+            <!-- Privacy Notice -->
+            <div class="privacy-notice">
+                We use your personal data to provide the best possible user experience on this site, to manage access to your account and for other purposes described in our <a href="#">privacy policy</a>.
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">REGISTER</button>
+                <button type="reset" class="btn btn-secondary">CLEAR</button>
+            </div>
+        </form>
+
+        <!-- Sign In Link -->
+        <p class="signin-link">Already have an account? <a href="login.html">Sign in</a></p>
+    </div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+
+        // Email validation
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Password validation
+        function isValidPassword(password) {
+            // Minimum 8 characters (any type)
+            return password.length >= 8;
+        }
+
+        // Clear errors
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.remove('show');
+            });
+            document.querySelectorAll('input').forEach(el => {
+                el.classList.remove('error');
+            });
+        }
+
+        // Handle form submission
+        function handleRegister(event) {
+            event.preventDefault();
+            clearErrors();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            let isValid = true;
+
+            // Validate First Name
+            if (!firstName) {
+                document.getElementById('firstNameError').textContent = 'First name is required';
+                document.getElementById('firstNameError').classList.add('show');
+                document.getElementById('firstName').classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Last Name
+            if (!lastName) {
+                document.getElementById('lastNameError').textContent = 'Last name is required';
+                document.getElementById('lastNameError').classList.add('show');
+                document.getElementById('lastName').classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Email
+            if (!email) {
+                document.getElementById('emailError').textContent = 'Email is required';
+                document.getElementById('emailError').classList.add('show');
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            } else if (!isValidEmail(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').classList.add('show');
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Password
+            if (!password) {
+                document.getElementById('passwordError').textContent = 'Password is required';
+                document.getElementById('passwordError').classList.add('show');
+                document.getElementById('password').classList.add('error');
+                isValid = false;
+            } else if (!isValidPassword(password)) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 8 characters';
+                document.getElementById('passwordError').classList.add('show');
+                document.getElementById('password').classList.add('error');
+                isValid = false;
+            }
+
+            // Validate Confirm Password
+            if (!confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Please confirm your password';
+                document.getElementById('confirmPasswordError').classList.add('show');
+                document.getElementById('confirmPassword').classList.add('error');
+                isValid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match';
+                document.getElementById('confirmPasswordError').classList.add('show');
+                document.getElementById('confirmPassword').classList.add('error');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Send data to backend server
+                const userData = {
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                };
+
+                fetch('http://localhost:5000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show success message
+                        const successMsg = document.getElementById('successMessage');
+                        successMsg.textContent = 'Account created successfully! Redirecting to login...';
+                        successMsg.classList.add('show');
+
+                        // Reset form
+                        document.getElementById('registerForm').reset();
+
+                        // Redirect after 2 seconds
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 2000);
+                    } else {
+                        alert('Error: ' + (data.message || 'Registration failed'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error connecting to server. Make sure the backend is running on http://localhost:5000');
+                });
+            }
+        }
+
+        // Real-time validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const error = document.getElementById('emailError');
+            const input = document.getElementById('email');
+            error.classList.remove('show');
+            input.classList.remove('error');
+
+            if (this.value && !isValidEmail(this.value)) {
+                error.textContent = 'Please enter a valid email address';
+                error.classList.add('show');
+                input.classList.add('error');
+            }
+        });
+
+        document.getElementById('password').addEventListener('blur', function() {
+            const error = document.getElementById('passwordError');
+            const input = document.getElementById('password');
+            error.classList.remove('show');
+            input.classList.remove('error');
+
+            if (this.value && !isValidPassword(this.value)) {
+                error.textContent = 'Password must be at least 8 characters';
+                error.classList.add('show');
+                input.classList.add('error');
+            }
+        });
+
+        document.getElementById('confirmPassword').addEventListener('blur', function() {
+            const error = document.getElementById('confirmPasswordError');
+            const input = document.getElementById('confirmPassword');
+            const password = document.getElementById('password').value;
+            error.classList.remove('show');
+            input.classList.remove('error');
+
+            if (this.value && this.value !== password) {
+                error.textContent = 'Passwords do not match';
+                error.classList.add('show');
+                input.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>

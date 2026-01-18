@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skina — Landing</title>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink-bg: #d8b2b4;          
+      --page-bg: #f7f2f2;
+      --soft-pink: #f3c7cf;        
+      --soft-pink-2:#f7d6dc;
+      --accent-pink:#d48a8f;
+      --black:#0a0a0a;
+      --muted:#6a6a6a;
+      --card:#ffffff;
+      --shadow: 0 12px 26px rgba(0,0,0,.18);
+      --shadow2: 0 10px 20px rgba(0,0,0,.12);
+      --radius: 18px;
+      --maxw: 1100px;             
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--page-bg);
+      color:#111;
+    }
+    img{ max-width:100%; display:block; }
+
+    /* ===== NAV ===== */
+    .nav{
+      background:#fff;
+      border-bottom: 1px solid #e7e0e0;
+      height: 72px;
+      display:flex;
+      align-items:center;
+    }
+    .nav-inner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width:120px;
+    }
+    .brand img{
+      width:64px; height:64px; object-fit:contain;
+      background:#fff;
+      border-radius: 8px;
+    }
+
+    .nav-mid{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex: 1;
+    }
+    .dropdown{
+      position:relative;
+    }
+    .drop-btn{
+      border:none;
+      background: var(--accent-pink);
+      color:#111;
+      font-weight:700;
+      padding: 10px 22px;
+      border-radius: 999px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    }
+    .caret{ font-size:14px; opacity:.9; }
+    .drop-menu{
+      position:absolute;
+      top: 46px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      background:#fff;
+      border: 1px solid #e7e0e0;
+      border-radius: 8px;
+      overflow:hidden;
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+      display:none;
+      z-index:50;
+    }
+    .drop-menu a{
+      display:block;
+      padding: 12px 14px;
+      text-decoration:none;
+      color:#111;
+      font-size: 13px;
+      border-bottom: 1px solid #f2eeee;
+    }
+    .drop-menu a:last-child{ border-bottom:none; }
+    .drop-menu a:hover{ background:#f6f2f2; }
+    .dropdown.open .drop-menu{ display:block; }
+
+    .nav-right{
+      display:flex; align-items:center; gap:10px;
+      min-width:120px;
+      justify-content:flex-end;
+    }
+    .btn-login{
+      border:none;
+      background:#111;
+      color:#fff;
+      font-weight:800;
+      padding: 10px 18px;
+      border-radius: 4px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      background: var(--pink-bg);
+      border-bottom: 1px solid rgba(0,0,0,.05);
+    }
+    .hero-inner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 28px;
+      padding: 48px 0 28px;
+      align-items:center;
+    }
+    .hero h1{
+      margin:0 0 16px 0;
+      font-size: 42px;
+      line-height:1.05;
+      font-weight: 900;
+      letter-spacing:-.5px;
+    }
+    .hero p{
+      margin: 0 0 18px 0;
+      font-size: 12.5px;
+      line-height: 1.6;
+      color:#111;
+      max-width: 420px;
+      background:#fff;
+      padding: 14px;
+      border-radius: 10px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    }
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .btn{
+      border:none;
+      cursor:pointer;
+      font-weight:800;
+      padding: 12px 18px;
+      border-radius: 4px;
+      font-size: 12.5px;
+    }
+    .btn-primary{ background:#111; color:#fff; }
+    .btn-secondary{
+      background:#e9e6e6;
+      color:#111;
+      display:flex; align-items:center; gap:10px;
+    }
+    .play-dot{
+      width: 16px; height:16px; border-radius:50%;
+      display:inline-grid; place-items:center;
+      border:1px solid #888;
+      font-size: 10px;
+    }
+
+   
+    .hero-art{
+      justify-self:end;
+      position:relative;
+      width: 420px;
+      max-width: 100%;
+    }
+    .block-frame{
+      background:
+        linear-gradient(#f2c7d0 1px, transparent 1px),
+        linear-gradient(90deg, #f2c7d0 1px, transparent 1px);
+      background-size: 26px 26px;
+      border-radius: 8px;
+      padding: 22px;
+      position:relative;
+      box-shadow: 0 18px 30px rgba(0,0,0,.14);
+    }
+    .block-frame:before{
+      content:"";
+      position:absolute;
+      inset:-14px;
+      border-radius: 10px;
+      border: 14px solid #3a3a3a;
+      clip-path: polygon(
+        0% 0%, 100% 0%, 100% 100%, 0% 100%,
+        0% 0%
+      );
+      z-index:-1;
+    }
+    .hero-illus{
+      width: 100%;
+      height:auto;
+      border-radius: 8px;
+    }
+
+    /* ===== ICON ROW ===== */
+    .icon-row{
+      background:#fff;
+      padding: 26px 0;
+    }
+    .icon-inner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 18px;
+    }
+    .icon-item{
+      width: 92px;
+      height: 92px;
+      display:grid;
+      place-items:center;
+    }
+    .icon-item img{
+      width: 86px;
+      height: 86px;
+      object-fit:contain;
+    }
+
+    /* ===== TRUST & TRANSPARENCY ===== */
+    .trust-wrap{
+      background: #000;
+      padding: 60px 0 80px 0;
+      position: relative;
+    }
+    .trust-panel{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto 50px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 40px;
+    }
+    .trust-top{
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .trust-title{
+      font-size: 36px;
+      font-weight: 900;
+      color:#fff;
+      letter-spacing: 1px;
+      margin:0;
+    }
+    .trust-photo{
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      overflow:hidden;
+      border: 5px solid rgba(255,215,0,.4);
+      display:block;
+      box-shadow: 0 20px 50px rgba(0,0,0,.5);
+      position:relative;
+      flex-shrink: 0;
+    }
+    .trust-photo img{
+      width:100%; height:100%; object-fit:cover;
+      filter: contrast(1.08) brightness(0.95);
+    }
+
+    .trust-cards{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .tcard{
+      background:#fff;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      padding: 32px 26px;
+      min-height: 240px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .tcard:hover{
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px rgba(0,0,0,.45);
+    }
+    .t-num{
+      font-size: 42px;
+      font-weight: 900;
+      color:#d4af37;
+      margin:0 0 12px 0;
+    }
+    .t-head{
+      margin:0 0 14px 0;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    .t-body{
+      margin:0;
+      font-size: 13px;
+      line-height: 1.65;
+      color:#5a5a5a;
+    }
+
+    /* ===== DEBUNKING ===== */
+    .debunk{
+      width: min(var(--maxw), 92vw);
+      margin: 22px auto 0;
+      padding: 6px 0 18px;
+    }
+    .debunk h3{
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .5px;
+    }
+    .debunk-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .95fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .tabs{
+      display:flex;
+      gap: 24px;
+      font-size: 11px;
+      padding: 6px 0 10px;
+      border-bottom: 1px solid #e7e0e0;
+      margin-bottom: 10px;
+    }
+    .tab{
+      background:transparent;
+      border:none;
+      font-weight:800;
+      cursor:pointer;
+      padding: 6px 2px;
+      color:#111;
+      opacity:.7;
+      border-bottom: 2px solid transparent;
+    }
+    .tab.active{
+      opacity:1;
+      border-bottom-color:#111;
+    }
+
+    .debunk-left p{
+      font-size: 12px;
+      line-height: 1.55;
+      margin: 0 0 10px 0;
+      color:#333;
+    }
+
+    .myth-table{
+      width:100%;
+      border-collapse:collapse;
+      background:#fff;
+      border: 1px solid #efe8e8;
+      border-radius: 10px;
+      overflow:hidden;
+      box-shadow: 0 10px 18px rgba(0,0,0,.05);
+    }
+    .myth-table td{
+      padding: 10px 10px;
+      border-bottom: 1px solid #f2eeee;
+      font-size: 11.5px;
+      vertical-align:top;
+    }
+    .myth-table tr:last-child td{ border-bottom:none; }
+    .myth-label{
+      width: 62px;
+      font-weight: 900;
+      color:#333;
+      opacity:.85;
+    }
+    .myth-btncell{
+      width: 168px;
+      text-align:right;
+    }
+    .pill{
+      border:none;
+      cursor:pointer;
+      font-weight: 900;
+      font-size: 10px;
+      padding: 7px 10px;
+      border-radius: 3px;
+    }
+    .pill-fake{ background:#d7a3a7; color:#fff; }
+    .pill-true{ background:#bfe3c9; color:#1f3b28; }
+    .debunk-right{
+      display:flex;
+      justify-content:flex-end;
+    }
+    .debunk-photo-wrap{
+      background: #e6a9ab;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 12px 22px rgba(0,0,0,.10);
+      width: 100%;
+      max-width: 330px;
+    }
+    .debunk-photo{
+      width:100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      background:#ddd;
+    }
+
+    /* small label + blue callout */
+    .debunk-under{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 14px;
+      align-items:start;
+    }
+    .note{
+      font-size: 10px;
+      font-weight: 900;
+      color:#222;
+      white-space:nowrap;
+      padding-top: 8px;
+    }
+    .blue-callout{
+      background:#cfe5f6;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 10px;
+      line-height: 1.45;
+      color:#1f2c35;
+      box-shadow: 0 10px 18px rgba(0,0,0,.06);
+    }
+
+    /* ===== FACTS STRIP ===== */
+    .facts-strip{
+      width: min(var(--maxw), 92vw);
+      margin: 22px auto 0;
+      background:#fff;
+      border-radius: 6px;
+      display:grid;
+      grid-template-columns: 160px 1fr 160px;
+      overflow:hidden;
+      box-shadow: 0 12px 22px rgba(0,0,0,.08);
+    }
+    .facts-img{
+      width:100%;
+      height: 180px;
+      object-fit: cover;
+      background:#ddd;
+    }
+    .facts-mid{
+      padding: 16px 16px 10px;
+      text-align:center;
+    }
+    .facts-mid h4{
+      margin: 0 0 6px 0;
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+    .facts-mid .sub{
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color:#111;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items:start;
+    }
+    .stat{
+      padding: 6px 8px;
+    }
+    .stat .big{
+      font-weight: 900;
+      font-size: 22px;
+      margin: 0 0 6px 0;
+    }
+    .stat .small{
+      font-size: 10.5px;
+      line-height: 1.35;
+      color:#4b4b4b;
+      margin:0;
+    }
+
+    /* ===== RECOMMENDATIONS CAROUSEL ===== */
+    .rec{
+      width: min(var(--maxw), 92vw);
+      margin: 22px auto 0;
+      padding: 10px 0 0;
+    }
+    .rec h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .carousel{
+      position:relative;
+      background: #f0d6d6;
+      border-radius: 8px;
+      padding: 18px 44px 22px;
+      overflow:hidden;
+      box-shadow: 0 14px 26px rgba(0,0,0,.10);
+      min-height: 340px;
+    }
+    .carousel-bg{
+      position:absolute;
+      inset:0;
+      background-image: linear-gradient(to right, rgba(255,255,255,.55), rgba(255,255,255,.55));
+      pointer-events:none;
+      opacity:.25;
+    }
+    .slides{
+      display:flex;
+      gap: 18px;
+      transition: transform .35s ease;
+      will-change: transform;
+      position:relative;
+      z-index:2;
+    }
+    .product{
+      width: 300px;
+      min-width: 300px;
+      background:#fff;
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: 0 12px 22px rgba(0,0,0,.12);
+    }
+    .brand-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom: 8px;
+      font-weight: 900;
+      font-size: 11px;
+    }
+    .brand-badge img{
+      width: 34px; height: 34px; object-fit:cover;
+      border-radius: 4px;
+    }
+    .product-title{
+      font-weight: 800;
+      font-size: 11.5px;
+      margin: 2px 0 10px;
+      color:#222;
+    }
+    .product-card{
+      background:#f6f4f4;
+      border-radius: 12px;
+      padding: 12px;
+      display:grid;
+      place-items:center;
+      height: 210px;
+      overflow:hidden;
+    }
+    .product-card img{
+      max-height: 210px;
+      object-fit: contain;
+    }
+    .car-btn{
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border:none;
+      cursor:pointer;
+      background:#ffffff;
+      box-shadow: 0 10px 18px rgba(0,0,0,.18);
+      z-index:5;
+      font-weight: 900;
+    }
+    .car-prev{ left: 10px; }
+    .car-next{ right: 10px; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testi{
+      width: min(var(--maxw), 92vw);
+      margin: 18px auto 0;
+      padding: 14px 0 24px;
+    }
+    .testi h3{
+      margin: 0 0 12px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .testi-viewport{
+      overflow:hidden;
+    }
+    .testi-row{
+      display:flex;
+      gap: 18px;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+    .tbox{
+      background:#fff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 12px 22px rgba(0,0,0,.08);
+      min-height: 155px;
+      flex: 0 0 calc((100% - 36px) / 3);
+    }
+    .tmeta{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      margin-bottom: 10px;
+    }
+    .avatar{
+      width: 32px; height: 32px; border-radius: 999px;
+      background:#e8e8e8;
+      display:grid; place-items:center;
+      font-weight: 900;
+      color:#777;
+      font-size: 12px;
+    }
+    .tname{
+      font-size: 11px;
+      font-weight: 900;
+      margin:0;
+    }
+    .trole{
+      margin:0;
+      font-size: 10px;
+      color:#777;
+    }
+    .tquote{
+      margin:0;
+      font-size: 10.5px;
+      line-height:1.45;
+      color:#444;
+    }
+
+    .dots{
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      margin-top: 14px;
+    }
+    .dot{
+      width: 12px; height: 12px;
+      border-radius: 999px;
+      background:#d0caca;
+      border:none;
+      cursor:pointer;
+    }
+    .dot.active{ background:#6f6f6f; }
+
+    /* ===== FOOTER / CONTACT ===== */
+    .footer{
+      background: #d8b2b4;
+      margin-top: 10px;
+      padding: 20px 0 0;
+    }
+    .footer-inner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 14px;
+      padding-bottom: 16px;
+    }
+    .thanks{
+      color:#fff;
+      letter-spacing: .35em;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .contact-wrap{
+      position:relative;
+      width: 320px;
+    }
+    .bubble{
+      background:#fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      text-align:center;
+      box-shadow: 0 12px 22px rgba(0,0,0,.10);
+      position:relative;
+    }
+    .bubble:after{
+      content:"";
+      position:absolute;
+      left: 16px;
+      bottom:-10px;
+      width: 0; height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid #fff;
+    }
+    .contact-btn{
+      margin-top: 8px;
+      width: 140px;
+      border:none;
+      background:#111;
+      color:#fff;
+      font-weight: 900;
+      padding: 10px 14px;
+      border-radius: 4px;
+      cursor:pointer;
+      display:block;
+      margin-left:auto;
+    }
+    .footer-bar{
+      background:#6b6b6b;
+      height: 44px;
+    }
+
+    /* ===== MODALS ===== */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index:999;
+    }
+    .modal-overlay.show{ display:flex; }
+
+    .modal{
+      width: min(720px, 94vw);
+      background: var(--soft-pink);
+      border-radius: 12px;
+      box-shadow: 0 22px 50px rgba(0,0,0,.30);
+      overflow:hidden;
+      max-height: 78vh;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-head{
+      background: rgba(255,255,255,.35);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+    }
+    .modal-title{
+      font-weight: 900;
+      font-size: 13px;
+      margin:0;
+    }
+    .close{
+      border:none;
+      background:#111;
+      color:#fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor:pointer;
+      font-weight: 900;
+    }
+    .modal-body{
+      padding: 14px;
+      overflow:auto;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      align-items:start;
+    }
+    .modal-body.single{
+      grid-template-columns: 1fr;
+    }
+    .modal-text{
+      background: rgba(255,255,255,.55);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .modal-text h4{
+      margin:0 0 8px 0;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .modal-text p{
+      margin:0 0 8px 0;
+      font-size: 11.5px;
+      line-height: 1.55;
+      color:#333;
+    }
+    .modal-media{
+      background: rgba(255,255,255,.45);
+      border-radius: 10px;
+      padding: 10px;
+      display:grid;
+      gap: 10px;
+      align-content:start;
+    }
+    .modal-media img{
+      width:100%;
+      border-radius: 8px;
+      height: 220px;
+      object-fit:cover;
+      background:#ddd;
+    }
+    .contact-form{
+      display:grid;
+      gap: 10px;
+    }
+    .contact-field{
+      display:grid;
+      gap: 6px;
+    }
+    .contact-field label{
+      font-size: 11px;
+      font-weight: 800;
+      color:#222;
+    }
+    .contact-field input,
+    .contact-field textarea{
+      width:100%;
+      padding: 10px 12px;
+      border: 1px solid #e4c7c9;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .contact-field textarea{
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-submit{
+      width: 120px;
+      border:none;
+      background:#d16b77;
+      color:#fff;
+      font-weight: 900;
+      padding: 10px 12px;
+      border-radius: 6px;
+      cursor:pointer;
+    }
+    .contact-submit:hover{
+      background:#c35f6b;
+    }
+    .steps{
+      display:grid;
+      gap: 10px;
+    }
+    .step{
+      background: rgba(255,255,255,.55);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .step b{
+      display:block;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+    .step span{
+      font-size: 11.5px;
+      line-height: 1.45;
+      color:#333;
+      display:block;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: 1fr; }
+      .hero-art{ justify-self:start; }
+      .trust-cards{ grid-template-columns: 1fr; }
+      .debunk-grid{ grid-template-columns: 1fr; }
+      .facts-strip{ grid-template-columns: 1fr; }
+      .facts-img{ height: 150px; }
+      .tbox{ flex-basis: 100%; }
+      .modal-body{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+      
+        <img src="assets/logo.png" alt="Skina logo">
+      </div>
+
+      <div class="nav-mid">
+        <div class="dropdown" id="servicesDropdown">
+          <button class="drop-btn" id="servicesBtn">
+            SERVICES <span class="caret">▾</span>
+          </button>
+          <div class="drop-menu" id="servicesMenu">
+            <a href="quiz.html">SKIN TYPE QUIZ</a>
+            <a href="quiz.html">ALLERGIES QUIZ</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <a class="btn-login" href="profile.html">PROFILE</a>
+        <a class="btn-login" href="login.html">LOG IN</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>Your skin. Your<br>journey. Your<br>choice.</h1>
+
+        <p>
+          Skina is a safe, supportive digital space designed to help teenagers understand their skin without pressure,
+          comparison, or unrealistic beauty standards. Rather than telling users what they should look like, the platform
+          focuses on helping them feel informed, confident, and in control of their own skincare journey.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startJourneyBtn">Start your journey</button>
+          <button class="btn btn-secondary" id="welcomeVideoBtn">
+            Welcome video <span class="play-dot">▶</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        
+        <div class="block-frame">
+          <img class="hero-illus" src="assets/hero-illustration.png" alt="Self-love illustration">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ICON ROW ===== -->
+  <section class="icon-row">
+    <div class="icon-inner">
+    
+      <div class="icon-item"><img src="assets/icon-lock.png" alt="Lock"></div>
+      <div class="icon-item"><img src="assets/icon-face.png" alt="Face"></div>
+      <div class="icon-item"><img src="assets/icon-selflove.png" alt="Self Love"></div>
+      <div class="icon-item"><img src="assets/icon-heart.png" alt="Heart"></div>
+      <div class="icon-item"><img src="assets/icon-sparkle.png" alt="Sparkle"></div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST & TRANSPARENCY ===== -->
+  <section class="trust-wrap">
+    <div class="trust-panel">
+      <div class="trust-top">
+        <h2 class="trust-title">TRUST &amp; TRANSPARENCY</h2>
+        <div class="trust-photo">
+         
+          <img src="assets/mirror.png" alt="Trust visual">
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="trust-cards">
+      <article class="tcard">
+        <p class="t-num">01.</p>
+        <p class="t-head">Privacy First</p>
+        <p class="t-body">
+          We understand and value your privacy. Any images or information you choose to share are used only to
+          support your skincare experience and are never sold, shared, or misused. Skina is designed to be a safe
+          space, especially for young users at every stage of your journey.
+        </p>
+      </article>
+
+      <article class="tcard">
+        <p class="t-num">02.</p>
+        <p class="t-head">Teen-Focused</p>
+        <p class="t-body">
+          Skina is created specifically for teenagers navigating skin concerns, self-image, and confidence. The
+          platform avoids judgmental language and unrealistic standards, focusing instead on reassurance,
+          understanding, and support.
+        </p>
+      </article>
+
+      <article class="tcard">
+        <p class="t-num">03.</p>
+        <p class="t-head">Evidence-Based</p>
+        <p class="t-body">
+          All recommendations are guided by established dermatological principles and credible research. This ensures
+          the advice provided is reliable, safe, and focused on long-term skin health rather than short-lived beauty trends.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== DEBUNKING THE LIES ===== -->
+  <section class="debunk" id="debunk">
+    <h3>DEBUNKING THE LIES!</h3>
+
+    <div class="debunk-grid">
+      <div class="debunk-left">
+        <!-- Tabs -->
+        <div class="tabs" role="tablist" aria-label="Debunk tabs">
+          <button class="tab active" data-tab="1" role="tab">DEBUNK 1</button>
+          <button class="tab" data-tab="2" role="tab">DEBUNK 2</button>
+          <button class="tab" data-tab="3" role="tab">DEBUNK 3</button>
+          <button class="tab" data-tab="4" role="tab">DEBUNK 4</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="debunkContent">
+        
+        </div>
+
+        <div class="debunk-under">
+          <div class="note">POP THAT WILL BE SHOWN ON THE SCREEN --------&gt;</div>
+          <div class="blue-callout" id="blueCallout">
+            No! Moderation is key in skincare, don’t waste your time or money.
+            The essential products that are tailored to you are enough. Most
+            people actually have overused results after using just 2–4 products
+            in their daily routine rather than 11!
+          </div>
+        </div>
+      </div>
+
+      <div class="debunk-right">
+        <div class="debunk-photo-wrap">
+          <!-- ✅ Put your “analytics hands” image here if you have it.
+               If you don't, keep this placeholder image or replace it later. -->
+          <img class="debunk-photo" src="assets/debunk-photo.png" alt="Debunk visual">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FACTS STRIP ===== -->
+  <section class="facts-strip">
+  
+    <img class="facts-img" src="assets/facts-left.png" alt="Facts left image">
+
+    <div class="facts-mid">
+      <h4>Here are some facts<br>Lets change this....</h4>
+
+      <div class="stats">
+        <div class="stat">
+          <p class="big">"71.2%"</p>
+          <p class="small">
+            feel “not good enough” because of social media filters and unrealistic standards.
+          </p>
+        </div>
+        <div class="stat">
+          <p class="big">"1 in 2"</p>
+          <p class="small">
+            Adolescents feel easy to buy advice on social media causes low self-esteem and makes them feel “unlovable”.
+          </p>
+        </div>
+        <div class="stat">
+          <p class="big">"67%"</p>
+          <p class="small">
+            of users heavily rely on social media for guidance, even though it often leads to “depressive moods”.
+          </p>
+        </div>
+      </div>
+    </div>
+
+   
+    <img class="facts-img" src="assets/facts-right.png" alt="Facts right image">
+  </section>
+
+  <!-- ===== RECOMMENDATIONS ===== -->
+  <section class="rec" id="recs">
+    <h3>Your Recommendations</h3>
+
+    <div class="carousel" aria-label="Recommendations carousel">
+      <div class="carousel-bg"></div>
+
+      <button class="car-btn car-prev" id="prevBtn" aria-label="Previous">‹</button>
+      <button class="car-btn car-next" id="nextBtn" aria-label="Next">›</button>
+
+      <div class="slides" id="slides">
+        <article class="product">
+          <div class="brand-badge">
+            <img src="assets/izil-logo.png" alt="izil logo">
+            izil
+          </div>
+          <div class="product-title">Prickly Pear Regenerating Cream</div>
+          <div class="product-card">
+            <img src="assets/prod-cream.png" alt="Cream">
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="brand-badge">
+            <img src="assets/izil-logo.png" alt="izil logo">
+            izil
+          </div>
+          <div class="product-title">Pure Prickly pear oil (deep moisturiser)</div>
+          <div class="product-card">
+            <img src="assets/prod-prickly-oil.png" alt="Prickly pear oil">
+          </div>
+        </article>
+
+        <article class="product">
+          <div class="brand-badge">
+            <img src="assets/izil-logo.png" alt="izil logo">
+            izil
+          </div>
+          <div class="product-title">100% Pure Argan Oil</div>
+          <div class="product-card">
+            <img src="assets/prod-argan.png" alt="Argan oil">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testi" id="testimonials">
+    <h3>Testimonials</h3>
+
+    <div class="testi-viewport">
+      <div class="testi-row" id="testiRow">
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Aisha Karim</p>
+            <p class="trole">Year 10</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "I stopped copying 10-step routines and my redness finally calmed down."
+          <br><br>
+          The debunk tips helped me understand what was actually irritating my skin. Simple routines really work.
+        </p>
+      </article>
+
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Sara S.</p>
+            <p class="trole">Student</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "The stats reminded me I was not alone."
+          <br><br>
+          Seeing real numbers about filters and comparison culture helped me feel less ashamed and more grounded.
+        </p>
+      </article>
+
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Maya L.</p>
+            <p class="trole">Year 12</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "Affordable recs that make sense."
+          <br><br>
+          I built a routine under 100 AED without feeling pushed to buy trendy, expensive products.
+        </p>
+      </article>
+
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Leila Omar</p>
+            <p class="trole">Year 11</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "The gentle tone made me actually trust the advice."
+          <br><br>
+          It feels like a friend explaining things instead of a brand trying to sell me more.
+        </p>
+      </article>
+
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Noor A.</p>
+            <p class="trole">College Student</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "Short, honest advice helped me stop overthinking."
+          <br><br>
+          The myths section is my favorite. I learned to patch test and keep my routine simple.
+        </p>
+      </article>
+
+      <article class="tbox">
+        <div class="tmeta">
+          <div class="avatar">👤</div>
+          <div>
+            <p class="tname">Maha R.</p>
+            <p class="trole">Student Athlete</p>
+          </div>
+        </div>
+        <p class="tquote">
+          "Finally, skincare info that feels safe and realistic."
+          <br><br>
+          The steps are clear, the advice is calm, and I do not feel judged for having breakouts.
+        </p>
+      </article>
+      </div>
+    </div>
+    </div>
+
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="thanks">THANK YOU, COME AGAIN</div>
+
+      <div class="contact-wrap">
+        <div class="bubble">SHARE YOUR JOURNEY LOVE AND THOUGHTS WITH THE COMMUNITY NOW!</div>
+        <button class="contact-btn" id="contactBtn">CONTACT</button>
+      </div>
+    </div>
+    <div class="footer-bar"></div>
+  </footer>
+
+  <!-- ===================== MODAL 1: START JOURNEY ===================== -->
+  <div class="modal-overlay" id="journeyModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="journeyTitle">
+      <div class="modal-head">
+        <p class="modal-title" id="journeyTitle">Start Your Skincare Journey</p>
+        <button class="close" data-close="journeyModal" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body single">
+        <div class="steps">
+          <div class="step">
+            <b>Step 1 — Understand your skin</b>
+            <span>Learn what skin types are and why your skin can change (stress, weather, hormones).</span>
+          </div>
+          <div class="step">
+            <b>Step 2 — Identify sensitivities</b>
+            <span>Spot patterns like stinging, itching, or redness so you avoid ingredients that don’t suit you.</span>
+          </div>
+          <div class="step">
+            <b>Step 3 — Keep it simple</b>
+            <span>Build a routine that’s realistic: cleanser + moisturiser + sunscreen (and only add extras if needed).</span>
+          </div>
+          <div class="step">
+            <b>Step 4 — Choose with confidence</b>
+            <span>Understand labels and marketing so you don’t feel pressured by trends or “perfect skin” content.</span>
+          </div>
+          <div class="step">
+            <b>Step 5 — Take the quiz</b>
+            <span>Use Skina’s quizzes to get tailored guidance (skin type + allergies/sensitivities).</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL 2: DEBUNK POPUP (TEXT + IMAGE) ===================== -->
+  <div class="modal-overlay" id="debunkModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="debunkTitle">
+      <div class="modal-head">
+        <p class="modal-title" id="debunkTitle">Debunk</p>
+        <button class="close" data-close="debunkModal" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-text">
+          <h4 id="debunkModalHeading">Heading</h4>
+          <p id="debunkModalText">Explanation goes here.</p>
+          <p id="debunkModalExtra" style="margin:0; font-weight:800; font-size:11px; opacity:.9;"></p>
+        </div>
+
+        <div class="modal-media">
+          <img id="debunkModalImg" src="assets/debunk-photo.png" alt="Debunk image">
+          <div style="font-size:10.5px; line-height:1.45; color:#333;">
+            Tip: If something online sounds extreme (“always”, “never”, “miracle”), double-check it with a trusted source.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== MODAL 3: CONTACT FORM ===================== -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <div class="modal-head">
+        <p class="modal-title" id="contactTitle">Contact Us</p>
+        <button class="close" data-close="contactModal" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal-body single">
+        <form class="contact-form">
+          <div class="contact-field">
+            <label for="contactName">Your Name</label>
+            <input id="contactName" name="name" type="text" placeholder="Enter Your Name" required>
+          </div>
+          <div class="contact-field">
+            <label for="contactEmail">Your Email</label>
+            <input id="contactEmail" name="email" type="email" placeholder="Enter Your Email" required>
+          </div>
+          <div class="contact-field">
+            <label for="contactPhone">Your Phone Number</label>
+            <input id="contactPhone" name="phone" type="tel" placeholder="Enter Your Phone Number">
+          </div>
+          <div class="contact-field">
+            <label for="contactAddress">Your Address</label>
+            <input id="contactAddress" name="address" type="text" placeholder="Enter Your Address">
+          </div>
+          <div class="contact-field">
+            <label for="contactMessage">Message</label>
+            <textarea id="contactMessage" name="message" placeholder="Text" required></textarea>
+          </div>
+          <button class="contact-submit" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ========= FILE SETUP (IMPORTANT) =========
+      Put everything in THIS folder structure:
+
+      your-project/
+      ├─ index.html  (this file)
+      └─ assets/
+         ├─ logo.png
+         ├─ hero-illustration.png           (your hugging mirror illustration)
+         ├─ mirror.png                      (your trust photo)
+         ├─ icon-lock.png                   (lock icon)
+         ├─ icon-face.png                   (face outline icon)
+         ├─ icon-selflove.png               (self love icon)
+         ├─ icon-heart.png                  (heart hands icon)
+         ├─ icon-sparkle.png                (sparkle skin icon)
+         ├─ izil-logo.png
+         ├─ prod-cream.png
+         ├─ prod-prickly-oil.png
+         ├─ prod-argan.png
+         ├─ debunk-photo.png                (optional: analytics/hands photo)
+         ├─ facts-left.png                  (optional: left face image)
+         └─ facts-right.png                 (optional: right face image)
+
+      
+
+    /* ===== SERVICES DROPDOWN ===== */
+    const dd = document.getElementById('servicesDropdown');
+    const ddBtn = document.getElementById('servicesBtn');
+
+    ddBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dd.classList.toggle('open');
+    });
+    document.addEventListener('click', () => dd.classList.remove('open'));
+
+    /* ===== START JOURNEY MODAL ===== */
+    const journeyModal = document.getElementById('journeyModal');
+    document.getElementById('startJourneyBtn').addEventListener('click', () => {
+      journeyModal.classList.add('show');
+    });
+
+    /* ===== DEBUNK MODAL ===== */
+    const debunkModal = document.getElementById('debunkModal');
+    const contactModal = document.getElementById('contactModal');
+    const debunkTitle = document.getElementById('debunkTitle');
+    const debunkModalHeading = document.getElementById('debunkModalHeading');
+    const debunkModalText = document.getElementById('debunkModalText');
+    const debunkModalExtra = document.getElementById('debunkModalExtra');
+    const modalMedia = document.querySelector('.modal-media');
+    const defaultModalMedia = modalMedia.innerHTML;
+    let debunkModalImg = document.getElementById('debunkModalImg');
+
+    function openDebunkPopup(payload){
+      debunkTitle.textContent = payload.title || "Debunk";
+      debunkModalHeading.textContent = payload.heading || "Explanation";
+      debunkModalText.textContent = payload.text || "";
+      debunkModalExtra.textContent = payload.extra || "";
+      modalMedia.innerHTML = defaultModalMedia;
+      debunkModalImg = document.getElementById('debunkModalImg');
+      debunkModalImg.src = payload.img || "assets/debunk-photo.png";
+      debunkModal.classList.add('show');
+    }
+
+    /* ===== CLOSE BUTTONS + CLICK OUTSIDE ===== */
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-close');
+        document.getElementById(id).classList.remove('show');
+      });
+    });
+    [journeyModal, debunkModal, contactModal].forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if(e.target === overlay) overlay.classList.remove('show');
+      });
+    });
+
+    /* ===== DEBUNK TABS (X: inline switches content) ===== */
+    const debunkData = {
+      1: {
+        intro: "Misinformation spreads quickly and can confuse or mislead people. This section helps users identify false claims and learn the truth. Promoting accurate information keeps the community informed and safe.",
+        myths: [
+          {
+            label: "Myth:",
+            text: "The more products you use, the better the results.",
+            verdict: "FAKE! CLICK FOR WHY",
+            type: "fake",
+            popup: {
+              title: "Debunk 1",
+              heading: "More products ≠ better skin",
+              text: "Using too many products at once can irritate your skin barrier and make breakouts or redness worse. A simple routine is usually safer and more effective.",
+              extra: "Try: cleanser + moisturiser + sunscreen, then add one product at a time.",
+              img: "assets/debunk-photo.png"
+            }
+          },
+          {
+            label: "Myth:",
+            text: "Toothpaste is a great spot treatment.",
+            verdict: "FAKE! CLICK FOR WHY",
+            type: "fake",
+            popup: {
+              title: "Debunk 1",
+              heading: "Toothpaste can burn your skin",
+              text: "Toothpaste often contains ingredients that can be too harsh for facial skin, leading to irritation, dryness, or even darker marks afterwards.",
+              extra: "Better: gentle spot treatment made for acne (ask a trusted adult/doctor if unsure).",
+              img: "assets/debunk-photo.png"
+            }
+          },
+          {
+            label: "Myth:",
+            text: "Drinking more water will cure your acne.",
+            verdict: "TRUE! MORE INFO HERE",
+            type: "true",
+            popup: {
+              title: "Debunk 1",
+              heading: "Water helps overall health… but acne is more complex",
+              text: "Hydration supports your body, but acne is influenced by hormones, genetics, stress, and skincare. Water alone usually won’t ‘cure’ it.",
+              extra: "Focus on consistent basics + gentle products.",
+              img: "assets/debunk-photo.png"
+            }
+          },
+          {
+            label: "Myth:",
+            text: "If you can’t eat it, you shouldn’t put it on your skin.",
+            verdict: "FAKE! CLICK FOR WHY",
+            type: "fake",
+            popup: {
+              title: "Debunk 1",
+              heading: "Skin isn’t the same as your stomach",
+              text: "Some safe skincare ingredients are not food (and vice versa). The key is whether an ingredient is tested and safe for skin — not whether you can eat it.",
+              extra: "Use products designed for skin and patch test when possible.",
+              img: "assets/debunk-photo.png"
+            }
+          }
+        ]
+      },
+      2: {
+        intro: "Not everything trending online is true. Debunk 2 focuses on influencer claims and ‘miracle’ routines that push unrealistic expectations or unsafe advice.",
+        myths: [
+          {
+            label:"Myth:",
+            text:"If a product tingles, it means it’s working.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 2",
+              heading:"Tingling can mean irritation",
+              text:"A strong tingle or burning can be a sign your skin barrier is stressed. Some actives can feel mild, but pain isn’t the goal.",
+              extra:"If it stings a lot, rinse and stop using it.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"You need a 10-step routine for ‘glass skin’.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 2",
+              heading:"More steps can = more risk",
+              text:"Many teens do better with fewer steps. Too many layers can clog pores or irritate sensitive skin.",
+              extra:"Simple + consistent usually wins.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"Natural always means safer.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 2",
+              heading:"‘Natural’ can still irritate",
+              text:"Essential oils and plant extracts can cause allergies or sensitivity. Safety depends on formulation, not the word ‘natural’.",
+              extra:"Patch test if you’re trying something new.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"Sunscreen is only for sunny days.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 2",
+              heading:"UV can still reach you",
+              text:"UV exposure can happen even when it’s cloudy. Sunscreen supports long-term skin health and helps prevent marks getting darker.",
+              extra:"Daily sunscreen is a strong habit.",
+              img:"assets/debunk-photo.png"
+            }
+          }
+        ]
+      },
+      3: {
+        intro:"Debunk 3 looks at comparison culture: filters, perfect lighting, and edited skin can make people feel like something is ‘wrong’ with them.",
+        myths:[
+          {
+            label:"Myth:",
+            text:"Everyone’s skin is smooth in real life.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 3",
+              heading:"Texture is normal",
+              text:"Pores, texture, and small bumps are common. Social media often uses filters and lighting that hides real skin.",
+              extra:"Healthy skin ≠ flawless skin.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"If you break out, you’re doing something wrong.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 3",
+              heading:"Breakouts can be normal",
+              text:"Hormones, stress, sleep, and genetics can all affect acne — especially in teen years.",
+              extra:"You’re not ‘dirty’ or ‘lazy’ because of acne.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"You should scrub more to ‘clean out’ acne.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 3",
+              heading:"Over-scrubbing can worsen acne",
+              text:"Harsh scrubs can damage your barrier and increase irritation. Gentle cleansing is usually better.",
+              extra:"Be kind to your skin.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"You must constantly change products to see results.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 3",
+              heading:"Consistency matters",
+              text:"Skin often needs time. Switching too quickly makes it hard to know what’s helping or harming.",
+              extra:"Give products time unless they irritate you.",
+              img:"assets/debunk-photo.png"
+            }
+          }
+        ]
+      },
+      4: {
+        intro:"Debunk 4 focuses on safety: what to do when you’re unsure, how to test products, and how to avoid risky trends.",
+        myths:[
+          {
+            label:"Myth:",
+            text:"If it’s viral, it’s safe.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 4",
+              heading:"Viral doesn’t mean tested",
+              text:"Some trends spread fast without proper evidence. Always check reliable sources and stop if your skin reacts badly.",
+              extra:"When in doubt, ask a trusted adult or healthcare professional.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"Patch testing is unnecessary.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 4",
+              heading:"Patch testing prevents bigger problems",
+              text:"Testing on a small area first can help you avoid full-face irritation.",
+              extra:"Especially important for sensitive skin.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"You must ‘feel’ a product to know it works.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 4",
+              heading:"Gentle can still be effective",
+              text:"Many effective products feel neutral. ‘Strong’ sensations can be irritation, not results.",
+              extra:"Look for calm, not burn.",
+              img:"assets/debunk-photo.png"
+            }
+          },
+          {
+            label:"Myth:",
+            text:"Skincare should fix everything instantly.",
+            verdict:"FAKE! CLICK FOR WHY",
+            type:"fake",
+            popup:{
+              title:"Debunk 4",
+              heading:"Real change takes time",
+              text:"Skin cycles take weeks. Fast ‘miracle’ promises are often misleading.",
+              extra:"Small progress is still progress.",
+              img:"assets/debunk-photo.png"
+            }
+          }
+        ]
+      }
+    };
+
+    const contentEl = document.getElementById('debunkContent');
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+
+    function renderDebunk(tabNum){
+      const d = debunkData[tabNum];
+      contentEl.innerHTML = `
+        <p>${d.intro}</p>
+        <table class="myth-table" aria-label="Myths table">
+          <tbody>
+            ${d.myths.map((m, idx) => `
+              <tr>
+                <td class="myth-label">${m.label}</td>
+                <td>${m.text}</td>
+                <td class="myth-btncell">
+                  <button class="pill ${m.type === 'fake' ? 'pill-fake' : 'pill-true'}"
+                    data-tab="${tabNum}" data-idx="${idx}">
+                    ${m.verdict}
+                  </button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+
+      
+      contentEl.querySelectorAll('.pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const t = btn.getAttribute('data-tab');
+          const i = btn.getAttribute('data-idx');
+          const payload = debunkData[t].myths[i].popup;
+          openDebunkPopup(payload);
+        });
+      });
+    }
+
+    tabs.forEach(t => {
+      t.addEventListener('click', () => {
+        tabs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        renderDebunk(t.getAttribute('data-tab'));
+      });
+    });
+
+    
+    renderDebunk(1);
+
+/* ===== WELCOME VIDEO BUTTON ===== */
+document.getElementById('welcomeVideoBtn').addEventListener('click', () => {
+  // Create a modal with video
+  const modal = document.getElementById('debunkModal');
+  document.getElementById('debunkTitle').textContent = "Welcome Video";
+  document.getElementById('debunkModalHeading').textContent = "Welcome to Skina";
+  document.getElementById('debunkModalText').textContent = "Comparing yourself with others is like hurting yourself, right? It's like a war that never ending and you can't win. While you browse through images on Instagram, just remember that \"real life\" is more beautiful than \"Insta-life\". Everything that have you seen on Instagram will make you feel that you're not good enough. You must know that everything on social media is not real. Behind an instagram photo that you seen there are many stories that we've never known. There are many insecurity that can't be expressed. The same insecurity like we feel. So far, we only see their happy life, their successfull stories, and their photoshop selfies without knowing the reality. If you see anything looks perfect on Instagram, make it as your inspiration, your role models, and also your motivation! Dont hate your life, your body, or anything that you curently have. Just be grateful and love your self first, so you'll slowly comparing yourself with other.";
+  document.getElementById('debunkModalExtra').textContent = "";
+  
+  modalMedia.innerHTML = '<iframe width="100%" height="300" src="https://www.youtube.com/embed/6VWkMsVUBak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+  
+  modal.classList.add('show');
+});
+    /* ===== RECOMMENDATIONS CAROUSEL ===== */
+    const slides = document.getElementById('slides');
+    const cards = Array.from(slides.children);
+    const cardW = 300;       
+    const gap = 18;
+    let idx = 0;
+
+    function updateCarousel(){
+      const x = idx * (cardW + gap);
+      slides.style.transform = `translateX(${-x}px)`;
+    }
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      idx = Math.min(idx + 1, cards.length - 1);
+      updateCarousel();
+    });
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      idx = Math.max(idx - 1, 0);
+      updateCarousel();
+    });
+
+    /* ===== TESTIMONIALS SLIDER ===== */
+    const testiRow = document.getElementById('testiRow');
+    const dots = document.getElementById('dots');
+    let testiPage = 0;
+
+    function getTestiPerView(){
+      return window.innerWidth <= 980 ? 1 : 3;
+    }
+
+    function getTestiStep(){
+      const card = testiRow.querySelector('.tbox');
+      if (!card) return 0;
+      const gap = parseFloat(getComputedStyle(testiRow).gap || 0);
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function renderTestiDots(totalPages){
+      dots.innerHTML = '';
+      for (let i = 0; i < totalPages; i += 1) {
+        const btn = document.createElement('button');
+        btn.className = 'dot' + (i === testiPage ? ' active' : '');
+        btn.setAttribute('type', 'button');
+        btn.setAttribute('aria-label', `Slide ${i + 1}`);
+        btn.dataset.i = String(i);
+        btn.addEventListener('click', () => {
+          testiPage = i;
+          updateTestimonials();
+        });
+        dots.appendChild(btn);
+      }
+    }
+
+    function updateTestimonials(){
+      const perView = getTestiPerView();
+      const totalCards = testiRow.children.length;
+      const totalPages = Math.max(1, Math.ceil(totalCards / perView));
+      if (testiPage > totalPages - 1) testiPage = totalPages - 1;
+
+      const step = getTestiStep() * perView;
+      testiRow.style.transform = `translateX(${-testiPage * step}px)`;
+      renderTestiDots(totalPages);
+    }
+
+    window.addEventListener('resize', updateTestimonials);
+    updateTestimonials();
+
+    /* ===== CONTACT BUTTON (placeholder) ===== */
+    document.getElementById('contactBtn').addEventListener('click', () => {
+      contactModal.classList.add('show');
+    });
+  </script>
+</body>
+
+</html>
+
+<mywebsite>

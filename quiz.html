@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skin Type Quiz</title>
+  <style>
+    :root{
+      --bg: #f7f2f2;
+      --card: #ffffff;
+      --accent: #d48a8f;
+      --ink: #111;
+      --muted: #666;
+      --shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .wrap{
+      width: min(860px, 92vw);
+      margin: 40px auto 60px;
+      background: var(--card);
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    h1{
+      margin: 0 0 6px 0;
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .sub{
+      margin: 0 0 22px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .field{
+      margin-bottom: 18px;
+      display:grid;
+      gap: 8px;
+    }
+    label{
+      font-size: 13px;
+      font-weight: 700;
+    }
+    select, input, textarea{
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ead7d9;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #fff;
+    }
+    textarea{ min-height: 90px; }
+    .checks{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      font-size: 13px;
+    }
+    .checks label{
+      font-weight: 600;
+      display:flex;
+      gap: 8px;
+      align-items:center;
+    }
+    .actions{
+      display:flex;
+      gap: 12px;
+      align-items:center;
+      margin-top: 6px;
+    }
+    .btn{
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .status{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .result{
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #fff5f6;
+      border: 1px solid #f0d2d4;
+      display:none;
+    }
+    .result h3{
+      margin: 0 0 8px 0;
+      font-size: 16px;
+    }
+    .product-list{
+      margin: 8px 0 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: #333;
+    }
+    @media (max-width: 640px){
+      .checks{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Skin Type Quiz</h1>
+    <p class="sub">Answer a few questions and we’ll save your latest results to your profile.</p>
+
+    <form id="quizForm">
+      <div class="field">
+        <label for="skinType">What does your skin feel like most days?</label>
+        <select id="skinType" required>
+          <option value="">Select one</option>
+          <option value="Oily">Oily</option>
+          <option value="Dry">Dry</option>
+          <option value="Combination">Combination</option>
+          <option value="Normal">Normal</option>
+          <option value="Sensitive">Sensitive</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>What are your main concerns?</label>
+        <div class="checks" id="concerns">
+          <label><input type="checkbox" value="Acne"> Acne</label>
+          <label><input type="checkbox" value="Redness"> Redness</label>
+          <label><input type="checkbox" value="Dryness"> Dryness</label>
+          <label><input type="checkbox" value="Dark spots"> Dark spots</label>
+          <label><input type="checkbox" value="Texture"> Texture</label>
+          <label><input type="checkbox" value="Sensitivity"> Sensitivity</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Any allergies or ingredients to avoid?</label>
+        <div class="checks" id="allergies">
+          <label><input type="checkbox" value="Fragrance"> Fragrance</label>
+          <label><input type="checkbox" value="Essential oils"> Essential oils</label>
+          <label><input type="checkbox" value="Alcohol"> Alcohol</label>
+          <label><input type="checkbox" value="Salicylic acid"> Salicylic acid</label>
+          <label><input type="checkbox" value="Benzoyl peroxide"> Benzoyl peroxide</label>
+          <label><input type="checkbox" value="Retinoids"> Retinoids</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="routineLevel">How consistent is your routine?</label>
+        <select id="routineLevel" required>
+          <option value="">Select one</option>
+          <option value="Beginner">Beginner</option>
+          <option value="Somewhat consistent">Somewhat consistent</option>
+          <option value="Very consistent">Very consistent</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="notes">Any extra notes?</label>
+        <textarea id="notes" placeholder="Optional"></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="submit">Save Results</button>
+        <span class="status" id="statusText"></span>
+      </div>
+    </form>
+
+    <div class="result" id="resultCard">
+      <h3>Your latest result</h3>
+      <p id="resultSummary"></p>
+      <div>
+        <strong>Recommended products (placeholder)</strong>
+        <ul class="product-list" id="productList"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const statusText = document.getElementById('statusText');
+    const resultCard = document.getElementById('resultCard');
+    const resultSummary = document.getElementById('resultSummary');
+    const productList = document.getElementById('productList');
+
+    function getCheckedValues(containerId){
+      return Array.from(document.querySelectorAll(`#${containerId} input:checked`))
+        .map((input) => input.value);
+    }
+
+    document.getElementById('quizForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      statusText.textContent = '';
+
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      if (!user || !user.id) {
+        alert('Please log in first.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const skinType = document.getElementById('skinType').value;
+      const routineLevel = document.getElementById('routineLevel').value;
+      const concerns = getCheckedValues('concerns');
+      const allergies = getCheckedValues('allergies');
+
+      const recommendations = [
+        "IZIL Gentle Cleanser",
+        "IZIL Barrier Repair Moisturizer",
+        "IZIL Daily SPF 50"
+      ];
+
+      const payload = {
+        userId: user.id,
+        skinType,
+        routineLevel,
+        concerns,
+        allergies,
+        notes: document.getElementById('notes').value.trim(),
+        recommendations
+      };
+
+      fetch('http://localhost:5000/api/quiz', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.success) throw new Error(data.message || 'Failed to save');
+          statusText.textContent = 'Saved!';
+          resultSummary.textContent = `Skin type: ${skinType}. Routine: ${routineLevel}. Concerns: ${concerns.join(', ') || 'None'}.`;
+          productList.innerHTML = recommendations.map((item) => `<li>${item}</li>`).join('');
+          resultCard.style.display = 'block';
+        })
+        .catch((err) => {
+          console.error(err);
+          statusText.textContent = 'Error saving results.';
+          alert('Error connecting to server. Make sure the backend is running on http://localhost:5000');
+        });
+    });
+  </script>
+</body>
+</html>

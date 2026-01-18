@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Profile</title>
+  <style>
+    :root{
+      --bg: #f7f2f2;
+      --card: #ffffff;
+      --accent: #d48a8f;
+      --ink: #111;
+      --muted: #666;
+      --shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+    *{ box-sizing: border-box; }
+    body{
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .wrap{
+      width: min(900px, 92vw);
+      margin: 40px auto 60px;
+      background: var(--card);
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+    }
+    h1{
+      margin: 0 0 10px 0;
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .meta{
+      display:grid;
+      gap: 8px;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+    .label{
+      font-weight: 800;
+      margin-right: 6px;
+    }
+    .card{
+      background: #fff5f6;
+      border: 1px solid #f0d2d4;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .card h3{
+      margin: 0 0 8px 0;
+      font-size: 16px;
+    }
+    .card p{
+      margin: 0 0 8px 0;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.45;
+    }
+    .product-list{
+      margin: 8px 0 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+    }
+    .muted{
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Your Profile</h1>
+    <div class="meta">
+      <div><span class="label">Name:</span><span id="profileName">Loading...</span></div>
+      <div><span class="label">Email:</span><span id="profileEmail">Loading...</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Latest Quiz Result</h3>
+      <p id="quizSummary">No quiz data yet.</p>
+      <div id="quizDetails" class="muted"></div>
+      <div style="margin-top:10px;">
+        <strong>Recommended products (placeholder)</strong>
+        <ul class="product-list" id="productList"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const profileName = document.getElementById('profileName');
+    const profileEmail = document.getElementById('profileEmail');
+    const quizSummary = document.getElementById('quizSummary');
+    const quizDetails = document.getElementById('quizDetails');
+    const productList = document.getElementById('productList');
+
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    if (!user || !user.id) {
+      alert('Please log in first.');
+      window.location.href = 'login.html';
+    } else {
+      fetch(`http://localhost:5000/api/profile?userId=${user.id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.success) throw new Error(data.message || 'Failed to load profile');
+          profileName.textContent = `${data.user.firstName} ${data.user.lastName}`;
+          profileEmail.textContent = data.user.email;
+
+          if (!data.quiz) {
+            quizSummary.textContent = 'No quiz data yet.';
+            quizDetails.textContent = 'Complete the quiz to see results here.';
+            productList.innerHTML = '';
+            return;
+          }
+
+          const concerns = (data.quiz.concerns || []).join(', ') || 'None';
+          const allergies = (data.quiz.allergies || []).join(', ') || 'None';
+          quizSummary.textContent = `Skin type: ${data.quiz.skinType || 'Not set'}. Routine: ${data.quiz.routineLevel || 'Not set'}.`;
+          quizDetails.textContent = `Concerns: ${concerns}. Allergies: ${allergies}.`;
+          productList.innerHTML = (data.quiz.recommendations || [])
+            .map((item) => `<li>${item}</li>`)
+            .join('');
+        })
+        .catch((err) => {
+          console.error(err);
+          quizSummary.textContent = 'Unable to load quiz data.';
+          quizDetails.textContent = 'Make sure the backend is running on http://localhost:5000';
+        });
+    }
+  </script>
+</body>
+</html>

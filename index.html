@@ -245,7 +245,7 @@
       object-fit:contain;
     }
 
-    /* ===== TRUST & TRANSPARENCY ===== */
+    /* ===== TRUST and TRANSPARENCY ===== */
     .trust-wrap{
       background: #000;
       padding: 60px 0 80px 0;
@@ -325,7 +325,7 @@
       color:#5a5a5a;
     }
 
-    /* ===== DEBUNKING ===== */
+    /* ===== DEBUNKIN section ===== */
     .debunk{
       width: min(var(--maxw), 92vw);
       margin: 22px auto 0;
@@ -430,7 +430,7 @@
       background:#ddd;
     }
 
-    /* small label + blue callout */
+    /* smal label + blue callo */
     .debunk-under{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -509,7 +509,7 @@
       margin:0;
     }
 
-    /* ===== RECOMMENDATIONS CAROUSEL ===== */
+    /* ===== RECOMMENDATIONS SLIDING ===== */
     .rec{
       width: min(var(--maxw), 92vw);
       margin: 22px auto 0;
@@ -888,7 +888,7 @@
       display:block;
     }
 
-    /* ===== RESPONSIVE ===== */
+  
     @media (max-width: 980px){
       .hero-inner{ grid-template-columns: 1fr; }
       .hero-art{ justify-self:start; }
@@ -1049,8 +1049,7 @@
 
       <div class="debunk-right">
         <div class="debunk-photo-wrap">
-          <!-- ✅ Put your “analytics hands” image here if you have it.
-               If you don't, keep this placeholder image or replace it later. -->
+        
           <img class="debunk-photo" src="assets/debunk-photo.png" alt="Debunk visual">
         </div>
       </div>
@@ -1253,7 +1252,7 @@
     <div class="footer-bar"></div>
   </footer>
 
-  <!-- ===================== MODAL 1: START JOURNEY ===================== -->
+  <!-- === MODAL 1: START JOURNEY ==== -->
   <div class="modal-overlay" id="journeyModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="journeyTitle">
       <div class="modal-head">
@@ -1288,7 +1287,7 @@
     </div>
   </div>
 
-  <!-- ===================== MODAL 2: DEBUNK POPUP (TEXT + IMAGE) ===================== -->
+  <!-- = MODAL 2: DEBUNK POPUP (TEXT + IMAGE)= -->
   <div class="modal-overlay" id="debunkModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="debunkTitle">
       <div class="modal-head">
@@ -1313,7 +1312,7 @@
     </div>
   </div>
 
-  <!-- ===================== MODAL 3: CONTACT FORM ===================== -->
+  <!-- =MODAL 3: CONTACT FORM = -->
   <div class="modal-overlay" id="contactModal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
       <div class="modal-head">
@@ -1350,31 +1349,11 @@
   </div>
 
   <script>
-    /* ========= FILE SETUP (IMPORTANT) =========
-      Put everything in THIS folder structure:
-
-      your-project/
-      ├─ index.html  (this file)
-      └─ assets/
-         ├─ logo.png
-         ├─ hero-illustration.png           (your hugging mirror illustration)
-         ├─ mirror.png                      (your trust photo)
-         ├─ icon-lock.png                   (lock icon)
-         ├─ icon-face.png                   (face outline icon)
-         ├─ icon-selflove.png               (self love icon)
-         ├─ icon-heart.png                  (heart hands icon)
-         ├─ icon-sparkle.png                (sparkle skin icon)
-         ├─ izil-logo.png
-         ├─ prod-cream.png
-         ├─ prod-prickly-oil.png
-         ├─ prod-argan.png
-         ├─ debunk-photo.png                (optional: analytics/hands photo)
-         ├─ facts-left.png                  (optional: left face image)
-         └─ facts-right.png                 (optional: right face image)
+  
 
       
 
-    /* ===== SERVICES DROPDOWN ===== */
+    /* = SERVICES DROPDOWN = */
     const dd = document.getElementById('servicesDropdown');
     const ddBtn = document.getElementById('servicesBtn');
 
@@ -1384,13 +1363,13 @@
     });
     document.addEventListener('click', () => dd.classList.remove('open'));
 
-    /* ===== START JOURNEY MODAL ===== */
+    /* = START JOURNEY MODAL = */
     const journeyModal = document.getElementById('journeyModal');
     document.getElementById('startJourneyBtn').addEventListener('click', () => {
       journeyModal.classList.add('show');
     });
 
-    /* ===== DEBUNK MODAL ===== */
+    /* = DEBUNK MODAL = */
     const debunkModal = document.getElementById('debunkModal');
     const contactModal = document.getElementById('contactModal');
     const debunkTitle = document.getElementById('debunkTitle');
@@ -1412,7 +1391,7 @@
       debunkModal.classList.add('show');
     }
 
-    /* ===== CLOSE BUTTONS + CLICK OUTSIDE ===== */
+    /* = CLOSE BUTTONS + CLICK OUTSIDE = */
     document.querySelectorAll('[data-close]').forEach(btn => {
       btn.addEventListener('click', () => {
         const id = btn.getAttribute('data-close');
@@ -1425,7 +1404,7 @@
       });
     });
 
-    /* ===== DEBUNK TABS (X: inline switches content) ===== */
+    /* = DEBUNK TABS (X: inline switches content) = */
     const debunkData = {
       1: {
         intro: "Misinformation spreads quickly and can confuse or mislead people. This section helps users identify false claims and learn the truth. Promoting accurate information keeps the community informed and safe.",
@@ -1704,7 +1683,7 @@
     
     renderDebunk(1);
 
-/* ===== WELCOME VIDEO BUTTON ===== */
+/* = WELCOME VIDEO BUTTON = */
 document.getElementById('welcomeVideoBtn').addEventListener('click', () => {
   // Create a modal with video
   const modal = document.getElementById('debunkModal');
@@ -1717,7 +1696,7 @@ document.getElementById('welcomeVideoBtn').addEventListener('click', () => {
   
   modal.classList.add('show');
 });
-    /* ===== RECOMMENDATIONS CAROUSEL ===== */
+    /* = RECOMMENDATIONS SLIDING = */
     const slides = document.getElementById('slides');
     const cards = Array.from(slides.children);
     const cardW = 300;       
@@ -1737,7 +1716,7 @@ document.getElementById('welcomeVideoBtn').addEventListener('click', () => {
       updateCarousel();
     });
 
-    /* ===== TESTIMONIALS SLIDER ===== */
+    /* = TESTIMONIALS SLIDER = */
     const testiRow = document.getElementById('testiRow');
     const dots = document.getElementById('dots');
     let testiPage = 0;
@@ -1783,7 +1762,7 @@ document.getElementById('welcomeVideoBtn').addEventListener('click', () => {
     window.addEventListener('resize', updateTestimonials);
     updateTestimonials();
 
-    /* ===== CONTACT BUTTON (placeholder) ===== */
+    /* = CONTACT BUTTON = */
     document.getElementById('contactBtn').addEventListener('click', () => {
       contactModal.classList.add('show');
     });

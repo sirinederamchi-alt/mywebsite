@@ -8,11 +8,10 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# Database setup
 DB_PATH = 'users.db'
 
 def init_db():
-    """Initialize the database with users table"""
+    
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS users (
@@ -44,16 +43,16 @@ def init_db():
     conn.close()
 
 def hash_password(password):
-    """Hash password using SHA-256"""
+    
     return hashlib.sha256(password.encode()).hexdigest()
 
 @app.route('/api/register', methods=['POST'])
 def register():
-    """Handle user registration"""
+   
     try:
         data = request.json
         
-        # Validate required fields
+        
         if not all(k in data for k in ['firstName', 'lastName', 'email', 'password']):
             return jsonify({'success': False, 'message': 'Missing required fields'}), 400
         
@@ -63,17 +62,17 @@ def register():
         phone = data.get('phone', '').strip()
         password = data['password']
         
-        # Validate inputs
+     
         if not firstName or not lastName or not email or not password:
             return jsonify({'success': False, 'message': 'Empty fields are not allowed'}), 400
         
         if len(password) < 8:
             return jsonify({'success': False, 'message': 'Password must be at least 8 characters'}), 400
         
-        # Hash password
+      
         hashed_password = hash_password(password)
         
-        # Insert into database
+       
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         
@@ -226,7 +225,7 @@ def profile():
 
 @app.route('/api/users', methods=['GET'])
 def get_users():
-    """Get all registered users (for testing purposes)"""
+  
     try:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
@@ -259,9 +258,9 @@ def health():
 
 if __name__ == '__main__':
     init_db()
-    print("✅ Database initialized")
-    print("🚀 Server starting on http://localhost:5001")
-    print("📝 Register endpoint: POST http://localhost:5001/api/register")
-    print("🔐 Login endpoint: POST http://localhost:5001/api/login")
-    print("👥 Get users endpoint: GET http://localhost:5001/api/users")
+    print(" Database initialized")
+    print(" Server starting on http://localhost:5001")
+    print(" Register endpoint: POST http://localhost:5001/api/register")
+    print(" Login endpoint: POST http://localhost:5001/api/login")
+    print(" Get users endpoint: GET http://localhost:5001/api/users")
     app.run(debug=True, port=5001)

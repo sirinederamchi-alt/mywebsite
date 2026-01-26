@@ -42,7 +42,7 @@
             display: block;
         }
 
-        /* ===== NAV ===== */
+        /* === NAV === */
         .nav {
             background: var(--card);
             border-bottom: 1px solid #e7e0e0;
@@ -90,7 +90,7 @@
             color: var(--black);
         }
 
-        /* ===== MAIN CONTAINER ===== */
+        /* = MAIN == */
         .container {
             width: min(var(--maxw), 92vw);
             margin: 60px auto;
@@ -107,7 +107,7 @@
             color: var(--black);
         }
 
-        /* ===== FORM GROUPS ===== */
+        /* = FORM GROUPS = */
         .form-group {
             margin-bottom: 28px;
         }
@@ -172,7 +172,7 @@
             gap: 20px;
         }
 
-        /* ===== BUTTONS ===== */
+        /* = BUTTONS = */
         .button-group {
             display: flex;
             gap: 16px;
@@ -215,7 +215,7 @@
             background: rgba(212, 138, 143, 0.1);
         }
 
-        /* ===== GOOGLE BUTTON ===== */
+        /* = GOOGLE BUTTON = */
         .google-signup {
             display: flex;
             align-items: center;
@@ -260,7 +260,7 @@
             background: #e7e0e0;
         }
 
-        /* ===== PRIVACY NOTICE ===== */
+        
         .privacy-notice {
             background: #f5f5f5;
             border-left: 4px solid var(--accent-pink);
@@ -282,7 +282,7 @@
             text-decoration: underline;
         }
 
-        /* ===== SIGN IN LINK ===== */
+        
         .signin-link {
             text-align: center;
             margin-top: 24px;
@@ -300,7 +300,7 @@
             text-decoration: underline;
         }
 
-        /* ===== SUCCESS MESSAGE ===== */
+        /* SUCCESS MESSAGE (** dont forget to add the content before deadlineeee)  */
         .success-message {
             background: rgba(39, 174, 96, 0.1);
             border: 2px solid var(--success);
@@ -315,7 +315,7 @@
             display: block;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /*  RESPONSIVE  */
         @media (max-width: 768px) {
             .container {
                 padding: 40px 24px;
@@ -413,7 +413,7 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
 
-        // Email validation
+        // validating
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
@@ -425,7 +425,7 @@
             return password.length >= 8;
         }
 
-        // Clear errors
+      
         function clearErrors() {
             document.querySelectorAll('.error-message').forEach(el => {
                 el.classList.remove('show');
@@ -435,7 +435,7 @@
             });
         }
 
-        // Handle form submission
+        //all now for validating
         function handleRegister(event) {
             event.preventDefault();
             clearErrors();
@@ -448,7 +448,7 @@
 
             let isValid = true;
 
-            // Validate First Name
+          
             if (!firstName) {
                 document.getElementById('firstNameError').textContent = 'First name is required';
                 document.getElementById('firstNameError').classList.add('show');
@@ -456,7 +456,7 @@
                 isValid = false;
             }
 
-            // Validate Last Name
+      
             if (!lastName) {
                 document.getElementById('lastNameError').textContent = 'Last name is required';
                 document.getElementById('lastNameError').classList.add('show');
@@ -464,7 +464,7 @@
                 isValid = false;
             }
 
-            // Validate Email
+          
             if (!email) {
                 document.getElementById('emailError').textContent = 'Email is required';
                 document.getElementById('emailError').classList.add('show');
@@ -477,7 +477,7 @@
                 isValid = false;
             }
 
-            // Validate Password
+           
             if (!password) {
                 document.getElementById('passwordError').textContent = 'Password is required';
                 document.getElementById('passwordError').classList.add('show');
@@ -490,7 +490,6 @@
                 isValid = false;
             }
 
-            // Validate Confirm Password
             if (!confirmPassword) {
                 document.getElementById('confirmPasswordError').textContent = 'Please confirm your password';
                 document.getElementById('confirmPasswordError').classList.add('show');
@@ -504,7 +503,7 @@
             }
 
             if (isValid) {
-                // Send data to backend server
+                // Sending the data to the backbend
                 const userData = {
                     firstName,
                     lastName,
@@ -522,15 +521,15 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Show success message
+                     
                         const successMsg = document.getElementById('successMessage');
                         successMsg.textContent = 'Account created successfully! Redirecting to login...';
                         successMsg.classList.add('show');
 
-                        // Reset form
+                        
                         document.getElementById('registerForm').reset();
 
-                        // Redirect after 2 seconds
+                       // redirection to the logggin pagee. 
                         setTimeout(() => {
                             window.location.href = 'login.html';
                         }, 2000);
@@ -545,7 +544,6 @@
             }
         }
 
-        // Real-time validation
         document.getElementById('email').addEventListener('blur', function() {
             const error = document.getElementById('emailError');
             const input = document.getElementById('email');
